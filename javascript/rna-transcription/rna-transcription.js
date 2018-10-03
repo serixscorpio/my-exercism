@@ -10,5 +10,5 @@ export function toRna(nucleotides) {
     return complement[nucleotide] || (() => { throw new Error('Invalid input DNA.'); })();
   }
 
-  return nucleotides.split('').map(singleDnaToRna).join('');
+  return [...nucleotides].map(singleDnaToRna).join('');
 }
