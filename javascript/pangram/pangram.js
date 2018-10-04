@@ -10,8 +10,8 @@ export function isPangram(sentence) {
     if (hasSeen[letter] === false) {
       hasSeen[letter] = true;
       numUniqueLettersSeen += 1;
+      if (numUniqueLettersSeen === alphabet.length) return true;
     }
-    if (numUniqueLettersSeen === alphabet.length) return true;
   }
   return false;
 }
