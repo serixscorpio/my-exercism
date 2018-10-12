@@ -1,7 +1,7 @@
 import Hamming from './hamming';
 
 describe('Hamming', () => {
-  const hamming = new Hamming();
+  const hamming = Object.create(Hamming);
 
   test('no difference between empty strands', () => {
     expect(hamming.compute('', '')).toEqual(0);
