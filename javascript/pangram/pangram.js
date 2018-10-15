@@ -5,8 +5,7 @@ export function isPangram(sentence) {
     return accumulator;
   }, {});
   let numUniqueLettersSeen = 0;
-  for (let i = 0; i < sentence.length; i += 1) {
-    const letter = sentence[i].toLowerCase();
+  for (let letter of sentence.toLowerCase()) {
     if (hasSeen[letter] === false) {
       hasSeen[letter] = true;
       numUniqueLettersSeen += 1;
