@@ -1,38 +1,35 @@
 export class Minesweeper {
-  annotate(input) {
-    if (input.length === 0) return input;
-    if (input[0].length === 0) return input;
-    const output = input.slice();
-    for (let i = 0; i < output.length; i += 1) {
-      output[i] = output[i].split('');
-    }
-    for (let i = 0; i < input.length; i += 1) {
-      for (let j = 0; j < input[i].length; j += 1) {
-        if (input[i][j] === '*') {
-          this.updateHint(i - 1, j - 1, output); // top left
-          this.updateHint(i - 1, j, output); // top
-          this.updateHint(i - 1, j + 1, output); // top right
-          this.updateHint(i, j - 1, output); // left
-          this.updateHint(i, j + 1, output); // right
-          this.updateHint(i + 1, j - 1, output); // bottom left
-          this.updateHint(i + 1, j, output); // bottom
-          this.updateHint(i + 1, j + 1, output); // bottom right
-        }
-      }
-    }
-    for (let i = 0; i < output.length; i += 1) {
-      output[i] = output[i].join('');
-    }
-    return output;
+  constructor() {
+    this.mine = '*';
+    this.emptySquare = ' ';
   }
 
-  updateHint(row, col, output) {
-    if (output[row] && output[row][col] && output[row][col] !== '*') {
-      if (output[row][col] === ' ') {
-        output[row][col] = 1;
-      } else {
-        output[row][col] += 1;
+  annotate(input) {
+    if (input.length === 0 || input[0].length === 0) return input;
+    const output = input.slice().map(row => row.split(''));
+    for (let i = 0; i < input.length; i += 1) {
+      for (let j = 0; j < input[i].length; j += 1) {
+        output[i][j] = this.updateCell(i, j, -1, -1, output);
+        output[i][j] = this.updateCell(i, j, -1, 0, output);
+        output[i][j] = this.updateCell(i, j, -1, 1, output);
+        output[i][j] = this.updateCell(i, j, 0, -1, output);
+        output[i][j] = this.updateCell(i, j, 0, 1, output);
+        output[i][j] = this.updateCell(i, j, 1, -1, output);
+        output[i][j] = this.updateCell(i, j, 1, 0, output);
+        output[i][j] = this.updateCell(i, j, 1, 1, output);
       }
     }
+    return output.map(row => row.join(''));
+  }
+
+  updateCell(row, col, rowOffset, colOffset, output) {
+    if (output[row][col] === this.mine) return this.mine;
+    if (output[row + rowOffset] && output[row + rowOffset][col + colOffset] === this.mine) {
+      if (output[row][col] === this.emptySquare) {
+        return 1;
+      }
+      return output[row][col] + 1;
+    }
+    return output[row][col];
   }
 }
