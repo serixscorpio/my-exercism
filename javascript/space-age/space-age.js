@@ -10,7 +10,7 @@ export class SpaceAge {
       { planet: 'Saturn', ratio: 29.447498 },
       { planet: 'Uranus', ratio: 84.016846 },
       { planet: 'Neptune', ratio: 164.79132 },
-    ].forEach(({planet, ratio}) => {
+    ].forEach(({ planet, ratio }) => {
       this[`on${planet}`] = () => Number((this.seconds / 31557600 / ratio).toFixed(2));
     });
   }
