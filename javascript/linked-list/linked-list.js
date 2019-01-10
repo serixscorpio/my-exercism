@@ -51,9 +51,16 @@ export default function LinkedList() {
       let curr = head;
       while (curr) {
         if (curr.item === item) {
-          /* eslint no-unused-expressions: ["error", { "allowTernary": true }] */
-          curr.prev ? (curr.prev.next = curr.next) : (head = curr.next);
-          curr.next ? (curr.next.prev = curr.prev) : (tail = curr.prev);
+          if (curr.prev) {
+            curr.prev.next = curr.next;
+          } else {
+            head = curr.next;
+          }
+          if (curr.next) {
+            curr.next.prev = curr.prev;
+          } else {
+            tail = curr.prev;
+          }
           length -= 1;
           break;
         }
