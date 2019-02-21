@@ -6,10 +6,7 @@ export function GradeSchool() {
     db[gradeNum].push(name);
     db[gradeNum].sort();
   };
-  const roster = () => Object.keys(db).reduce((accumulator, key) => {
-    accumulator[key] = grade(key);
-    return accumulator;
-  }, {});
+  const roster = () => Object.keys(db).reduce((acc, key) => ({ ...acc, [key]: grade(key) }), {});
 
   return Object.freeze({
     add,
