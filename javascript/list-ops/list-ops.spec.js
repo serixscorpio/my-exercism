@@ -2,8 +2,9 @@ import { List } from './list-ops';
 
 describe('append entries to a list and return the new list', () => {
   test('empty lists', () => {
-    const list1 = new List();
-    const list2 = new List();
+    const list1 = List();
+    const list2 = List();
+    // expect(list1.push(1)).toEqual(new List([0, 1]));
     expect(list1.append(list2)).toEqual(new List());
   });
 
@@ -33,7 +34,7 @@ describe('concat lists and lists of lists into new list', () => {
     const list2 = new List([3]);
     const list3 = new List([]);
     const list4 = new List([4, 5, 6]);
-    const listOfLists = new List([list2, list3, list4])
+    const listOfLists = new List([list2, list3, list4]);
     expect(list1.concat(listOfLists).values).toEqual([1, 2, 3, 4, 5, 6]);
   });
 });
