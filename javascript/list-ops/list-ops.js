@@ -5,29 +5,42 @@ const HEAD = {
     return this;
   },
   foldl(fn, init) {
-    this.next.foldl(fn, fn(init, this.value));
+    return this.next.foldl(fn, fn(init, this.value));
   },
   push(value) {
     this.next = this.next.push(value);
     return this;
   },
+  append(list) {
+    return list.foldl((accumulator, item) => accumulator.push(item), this);
+  },
+  get values() {
+    return [this.value, ...this.next.values];
+  },
 };
 
 const EMPTY = {
-  append(list = EMPTY) {
-    if (list === EMPTY) return EMPTY;
+  init() {
+    this.value = undefined;
+    this.next = this.value;
+    return this;
+  },
+  append(list) {
     return list;
   },
   foldl(_fn, init) {
     return init;
   },
   push(value) {
-    return Object.create(HEAD).init(value, EMPTY);
+    return Object.create(HEAD).init(value, this);
+  },
+  get values() {
+    return [];
   },
 };
 
 function fromArray([first, ...rest]) {
-  if (first === undefined) return EMPTY;
+  if (first === undefined) return Object.create(EMPTY).init();
   return Object.create(HEAD).init(first, fromArray(rest));
 }
 
