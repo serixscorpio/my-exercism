@@ -114,12 +114,12 @@ describe('folds (reduces) the given list from the right with a function', () => 
 
 
 describe('reverse the elements of a list', () => {
-  xtest('empty list', () => {
+  test('empty list', () => {
     const list1 = new List();
     expect(list1.reverse().values).toEqual([]);
   });
 
-  xtest('non-empty list', () => {
+  test('non-empty list', () => {
     const list1 = new List([1, 3, 5, 7]);
     expect(list1.reverse().values).toEqual([7, 5, 3, 1]);
   });

@@ -32,6 +32,9 @@ const ELEMENT = {
     this.next = this.next.push(value);
     return this;
   },
+  reverse() {
+    return this.next.reverse().push(this.value);
+  },
   get values() {
     return [this.value, ...this.next.values];
   },
@@ -66,6 +69,9 @@ const EMPTY = {
   },
   push(value) {
     return Object.create(ELEMENT).init(value, this);
+  },
+  reverse() {
+    return this;
   },
   get values() {
     return [];
