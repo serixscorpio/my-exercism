@@ -1,14 +1,7 @@
-const HEAD = {
+const ELEMENT = {
   init(value, next) {
     this.value = value;
     this.next = next;
-    return this;
-  },
-  foldl(fn, init) {
-    return this.next.foldl(fn, fn(init, this.value));
-  },
-  push(value) {
-    this.next = this.next.push(value);
     return this;
   },
   append(list) {
@@ -16,6 +9,13 @@ const HEAD = {
   },
   concat(lists) {
     return lists.foldl((accumulator, list) => accumulator.append(list), this);
+  },
+  foldl(fn, init) {
+    return this.next.foldl(fn, fn(init, this.value));
+  },
+  push(value) {
+    this.next = this.next.push(value);
+    return this;
   },
   get values() {
     return [this.value, ...this.next.values];
@@ -38,7 +38,7 @@ const EMPTY = {
     return init;
   },
   push(value) {
-    return Object.create(HEAD).init(value, this);
+    return Object.create(ELEMENT).init(value, this);
   },
   get values() {
     return [];
@@ -47,7 +47,7 @@ const EMPTY = {
 
 function fromArray([first, ...rest]) {
   if (first === undefined) return Object.create(EMPTY).init();
-  return Object.create(HEAD).init(first, fromArray(rest));
+  return Object.create(ELEMENT).init(first, fromArray(rest));
 }
 
 export function List(input = []) {
