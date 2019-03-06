@@ -19,6 +19,12 @@ const ELEMENT = {
   foldl(fn, init) {
     return this.next.foldl(fn, fn(init, this.value));
   },
+  length() {
+    return 1 + this.next.length();
+  },
+  map(fn) {
+    return Object.create(ELEMENT).init(fn(this.value), this.next.map(fn));
+  },
   push(value) {
     this.next = this.next.push(value);
     return this;
@@ -45,6 +51,12 @@ const EMPTY = {
   },
   foldl(_fn, init) {
     return init;
+  },
+  length() {
+    return 0;
+  },
+  map() {
+    return this;
   },
   push(value) {
     return Object.create(ELEMENT).init(value, this);

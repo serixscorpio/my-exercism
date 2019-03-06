@@ -62,12 +62,12 @@ describe('filter list returning only values that satisfy the filter function', (
 
 
 describe('returns the length of a list', () => {
-  xtest('empty list', () => {
+  test('empty list', () => {
     const list1 = new List();
     expect(list1.length()).toEqual(0);
   });
 
-  xtest('non-empty list', () => {
+  test('non-empty list', () => {
     const list1 = new List([1, 2, 3, 4]);
     expect(list1.length()).toEqual(4);
   });
@@ -75,12 +75,12 @@ describe('returns the length of a list', () => {
 
 
 describe('returns a list of elements whose values equal the list value transformed by the mapping function', () => {
-  xtest('empty list', () => {
+  test('empty list', () => {
     const list1 = new List();
     expect(list1.map(el => ++el).values).toEqual([]);
   });
 
-  xtest('non-empty list', () => {
+  test('non-empty list', () => {
     const list1 = new List([1, 3, 5, 7]);
     expect(list1.map(el => ++el).values).toEqual([2, 4, 6, 8]);
   });
@@ -88,12 +88,12 @@ describe('returns a list of elements whose values equal the list value transform
 
 
 describe('folds (reduces) the given list from the left with a function', () => {
-  xtest('empty list', () => {
+  test('empty list', () => {
     const list1 = new List();
     expect(list1.foldl((acc, el) => el / acc, 2)).toEqual(2);
   });
 
-  xtest('division of integers', () => {
+  test('division of integers', () => {
     const list1 = new List([1, 2, 3, 4]);
     expect(list1.foldl((acc, el) => el / acc, 24)).toEqual(64);
   });
