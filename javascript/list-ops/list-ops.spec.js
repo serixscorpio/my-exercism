@@ -23,19 +23,27 @@ describe('append entries to a list and return the new list', () => {
 
 
 describe('concat lists and lists of lists into new list', () => {
-  xtest('empty list', () => {
+  test('empty list', () => {
     const list1 = new List();
     const list2 = new List();
     expect(list1.concat(list2).values).toEqual([]);
   });
 
-  xtest('list of lists', () => {
+  test('list of lists', () => {
     const list1 = new List([1, 2]);
     const list2 = new List([3]);
     const list3 = new List([]);
     const list4 = new List([4, 5, 6]);
     const listOfLists = new List([list2, list3, list4]);
     expect(list1.concat(listOfLists).values).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+
+  test('concat list of lists to empty list', () => {
+    const list1 = new List();
+    const list2 = new List([1]);
+    const list3 = new List([2]);
+    const listOfLists = new List([list2, list3]);
+    expect(list1.concat(listOfLists).values).toEqual([1, 2]);
   });
 });
 

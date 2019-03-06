@@ -14,6 +14,9 @@ const HEAD = {
   append(list) {
     return list.foldl((accumulator, item) => accumulator.push(item), this);
   },
+  concat(lists) {
+    return lists.foldl((accumulator, list) => accumulator.append(list), this);
+  },
   get values() {
     return [this.value, ...this.next.values];
   },
@@ -27,6 +30,9 @@ const EMPTY = {
   },
   append(list) {
     return list;
+  },
+  concat(lists) {
+    return lists.foldl((accumulator, list) => accumulator.append(list), this);
   },
   foldl(_fn, init) {
     return init;
