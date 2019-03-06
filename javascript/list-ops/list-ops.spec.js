@@ -2,9 +2,8 @@ import { List } from './list-ops';
 
 describe('append entries to a list and return the new list', () => {
   test('empty lists', () => {
-    const list1 = List();
-    const list2 = List();
-    // expect(list1.push(1)).toEqual(new List([0, 1]));
+    const list1 = new List();
+    const list2 = new List();
     expect(list1.append(list2)).toEqual(new List());
   });
 
