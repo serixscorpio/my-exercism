@@ -19,6 +19,9 @@ const ELEMENT = {
   foldl(fn, init) {
     return this.next.foldl(fn, fn(init, this.value));
   },
+  foldr(fn, init) {
+    return fn(this.next.foldr(fn, init), this.value);
+  },
   length() {
     return 1 + this.next.length();
   },
@@ -50,6 +53,9 @@ const EMPTY = {
     return this;
   },
   foldl(_fn, init) {
+    return init;
+  },
+  foldr(_fn, init) {
     return init;
   },
   length() {
