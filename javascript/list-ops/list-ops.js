@@ -10,6 +10,12 @@ const ELEMENT = {
   concat(lists) {
     return lists.foldl((accumulator, list) => accumulator.append(list), this);
   },
+  filter(fn) {
+    if (fn(this.value)) {
+      return Object.create(ELEMENT).init(this.value, this.next.filter(fn));
+    }
+    return this.next.filter(fn);
+  },
   foldl(fn, init) {
     return this.next.foldl(fn, fn(init, this.value));
   },
@@ -33,6 +39,9 @@ const EMPTY = {
   },
   concat(lists) {
     return lists.foldl((accumulator, list) => accumulator.append(list), this);
+  },
+  filter() {
+    return this;
   },
   foldl(_fn, init) {
     return init;
