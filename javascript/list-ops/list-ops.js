@@ -41,11 +41,6 @@ const ELEMENT = {
 };
 
 const EMPTY = {
-  init() {
-    this.value = undefined;
-    this.next = this.value;
-    return this;
-  },
   append(list) {
     return list;
   },
@@ -79,7 +74,7 @@ const EMPTY = {
 };
 
 function fromArray([first, ...rest]) {
-  if (first === undefined) return Object.create(EMPTY).init();
+  if (first === undefined) return EMPTY;
   return Object.create(ELEMENT).init(first, fromArray(rest));
 }
 
