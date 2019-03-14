@@ -26,16 +26,16 @@ describe('Robot', () => {
     expect(robot.name).toMatch(/^[A-Z]{2}\d{3}$/);
   });
 
-  xtest('name is the same each time', () => {
+  test('name is the same each time', () => {
     expect(robot.name).toEqual(robot.name);
   });
 
-  xtest('different robots have different names', () => {
+  test('different robots have different names', () => {
     const differentRobot = new Robot();
     expect(differentRobot.name).not.toEqual(robot.name);
   });
 
-  xtest('is able to reset the name', () => {
+  test('is able to reset the name', () => {
     const originalName = robot.name;
 
     robot.reset();
@@ -45,7 +45,7 @@ describe('Robot', () => {
     expect(originalName).not.toEqual(newName);
   });
 
-  xtest('should set a unique name after reset', () => {
+  test('should set a unique name after reset', () => {
     const NUMBER_OF_ROBOTS = 10000;
     const usedNames = new Set();
 
@@ -58,13 +58,13 @@ describe('Robot', () => {
     expect(usedNames.size).toEqual(NUMBER_OF_ROBOTS + 1);
   });
 
-  xtest('internal name cannot be modified', () => {
+  test('internal name cannot be modified', () => {
     const modifyInternal = () => { robot.name += 'a modification'; };
     expect(modifyInternal).toThrow();
   });
 
 
-  xtest('new names should not be sequential', () => {
+  test('new names should not be sequential', () => {
     const name1 = robot.name;
     const name2 = (new Robot()).name;
     const name3 = (new Robot()).name;
@@ -73,7 +73,7 @@ describe('Robot', () => {
     expect(areSequential(name2, name3)).toBe(false);
   });
 
-  xtest('names from reset should not be sequential', () => {
+  test('names from reset should not be sequential', () => {
     const name1 = robot.name;
     robot.reset();
     const name2 = robot.name;
@@ -85,7 +85,7 @@ describe('Robot', () => {
   });
 
   // This test is optional.
-  xtest('there can be lots of robots with different names each', () => {
+  test('there can be lots of robots with different names each', () => {
     const NUMBER_OF_ROBOTS = 10000;
     const usedNames = new Set();
 
