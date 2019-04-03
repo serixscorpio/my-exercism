@@ -4,40 +4,40 @@ const nameGen = {
   },
 };
 
-const CHAR_START = 65;
-const CHAR_RANGE = 26;
-const DIGIT_START = 48;
-const DIGIT_RANGE = 10;
+const LETTERS = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const robotNameGen = Object.assign(Object.create(nameGen), {
   init() {
     this.namePool = [];
-    for (let char1 = CHAR_START; char1 < CHAR_START + CHAR_RANGE; char1 += 1) {
-      for (let char2 = CHAR_START; char2 < CHAR_START + CHAR_RANGE; char2 += 1) {
-        for (let digit1 = DIGIT_START; digit1 < DIGIT_START + DIGIT_RANGE; digit1 += 1) {
-          for (let digit2 = DIGIT_START; digit2 < DIGIT_START + DIGIT_RANGE; digit2 += 1) {
-            for (let digit3 = DIGIT_START; digit3 < DIGIT_START + DIGIT_RANGE; digit3 += 1) {
-              this.namePool.push(String.fromCharCode(char1, char2, digit1, digit2, digit3));
-            }
-          }
-        }
-      }
-    }
+    LETTERS.forEach((a) => {
+      LETTERS.forEach((b) => {
+        DIGITS.forEach((c) => {
+          DIGITS.forEach((d) => {
+            DIGITS.forEach((e) => {
+              this.namePool.push([a, b, c, d, e].join(''));
+            });
+          });
+        });
+      });
+    });
     this.releaseNames();
   },
   nextUniqueName() {
-    if (this.numNamesAvailable === 0) {
-      throw new Error('No more name avaiable');
+    if (this.nextUniqueNameIndex === this.namePool.length) {
+      throw new Error('No more name available');
     }
-    const randomlySelectedIndex = this.randomNumber(this.numNamesAvailable);
-    const lastAvailableIndex = (this.numNamesAvailable -= 1);
-    const pickedName = this.namePool[randomlySelectedIndex];
-    this.namePool[randomlySelectedIndex] = this.namePool[lastAvailableIndex];
-    this.namePool[lastAvailableIndex] = pickedName;
+    const pickedName = this.namePool[this.nextUniqueNameIndex];
+    this.nextUniqueNameIndex += 1;
     return pickedName;
   },
   releaseNames() {
-    this.numNamesAvailable = this.namePool.length;
+    // modern vesion of Fisher-Yates shuffle
+    for (let i = this.namePool.length - 1; i > 0; i -= 1) {
+      const j = this.randomNumber(i);
+      [this.namePool[j], this.namePool[i]] = [this.namePool[i], this.namePool[j]];
+    }
+    this.nextUniqueNameIndex = 0;
   },
 });
 
