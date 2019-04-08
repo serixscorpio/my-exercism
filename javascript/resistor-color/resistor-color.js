@@ -1,10 +1,5 @@
 const COLORS = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"];
 
-const resistors = COLORS.reduce((accumulator, color, index) => {
-  accumulator[color] = index;
-  return accumulator;
-}, {});
-
-const colorCode = (color) => resistors[color];
+const colorCode = (color) => COLORS.indexOf(color);
 
 export { colorCode, COLORS };
