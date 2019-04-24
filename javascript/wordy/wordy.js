@@ -2,6 +2,12 @@ const plus = (n, m) => n + m;
 const minus = (n, m) => n - m;
 const multipliedBy = (n, m) => n * m;
 const dividedBy = (n, m) => n / m;
+const operators = {
+  plus,
+  minus,
+  "multiplied by": multipliedBy,
+  "divided by": dividedBy
+};
 
 export class ArgumentError {}
 
@@ -14,62 +20,49 @@ export class WordProblem {
     let result = /^-?\d+/.exec(mathQuestion.input);
     if (result === null)
       throw new ArgumentError("Expected a number, but didn't find one");
-    mathQuestion.expression.push(Number(result[0]));
+    mathQuestion.tokens.push(Number(result[0]));
     mathQuestion.input = mathQuestion.input.replace(result[0], "");
   }
   getOperator(mathQuestion) {
     this.removeSpace(mathQuestion);
-    const operators = {
-      plus,
-      minus,
-      "multiplied by": multipliedBy,
-      "divided by": dividedBy
-    };
     for (let key in operators) {
       if (new RegExp(`^${key}`).test(mathQuestion.input)) {
-        mathQuestion.expression.push(operators[key]);
+        mathQuestion.tokens.push(operators[key]);
         mathQuestion.input = mathQuestion.input.replace(key, "");
         return;
       }
     }
     throw new ArgumentError("Expected an operator, but didn't find one");
   }
+  /*
+   * Turns a string "What is 1 plus 1?" into an array [1, PlusFunction, 1]
+   */
   tokenize() {
     if (!this.question.endsWith("?"))
       throw new ArgumentError("The question should end with '?'");
-    if (!this.question.startsWith("What is "))
+    if (!this.question.startsWith("What is"))
       throw new ArgumentError("The question should start with 'What is'");
     let mathQuestion = {
-      input: this.question.substring(7, this.question.length - 1),
-      expression: []
+      input: /^What is(.*)\?$/.exec(this.question)[1],
+      tokens: []
     };
     // eslint-disable-next-line no-constant-condition
     while (true) {
       this.getNumber(mathQuestion);
-      if (mathQuestion.input) {
-        this.getOperator(mathQuestion);
-      } else {
-        return mathQuestion.expression;
-      }
+      if (!mathQuestion.input) return mathQuestion.tokens;
+      this.getOperator(mathQuestion);
     }
   }
   removeSpace(mathQuestion) {
     mathQuestion.input = mathQuestion.input.trim();
   }
   answer() {
-    let expression = this.tokenize();
-    let lhs = expression[0];
-    let operatorFn = null;
-    for (let i = 1; i < expression.length; i += 1) {
-      switch (typeof expression[i]) {
-        case "function":
-          operatorFn = expression[i];
-          break;
-        case "number":
-          lhs = operatorFn(lhs, expression[i]);
-          break;
-      }
+    let tokens = this.tokenize();
+    let answer = tokens[0];
+    for (let i = 1; i < tokens.length; i += 2) {
+      let operatorFn = tokens[i];
+      answer = operatorFn(answer, tokens[i + 1]);
     }
-    return lhs;
+    return answer;
   }
 }
