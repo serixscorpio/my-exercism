@@ -1,15 +1,16 @@
-const plus = (n, m) => n + m;
-const minus = (n, m) => n - m;
-const multipliedBy = (n, m) => n * m;
-const dividedBy = (n, m) => n / m;
 const operators = {
-  plus,
-  minus,
-  "multiplied by": multipliedBy,
-  "divided by": dividedBy
+  plus: (n, m) => n + m,
+  minus: (n, m) => n - m,
+  "multiplied by": (n, m) => n * m,
+  "divided by": (n, m) => n / m
 };
 
-export class ArgumentError {}
+export class ArgumentError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ArgumentError";
+  }
+}
 
 export class WordProblem {
   constructor(question) {
