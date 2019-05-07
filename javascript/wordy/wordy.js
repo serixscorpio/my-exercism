@@ -17,7 +17,7 @@ export class WordProblem {
     this.question = question;
   }
   getNumber(mathQuestion) {
-    this.removeSpace(mathQuestion);
+    mathQuestion.input = mathQuestion.input.trimStart();
     let result = /^-?\d+/.exec(mathQuestion.input);
     if (result === null)
       throw new ArgumentError("Expected a number, but didn't find one");
@@ -25,7 +25,7 @@ export class WordProblem {
     mathQuestion.input = mathQuestion.input.replace(result[0], "");
   }
   getOperator(mathQuestion) {
-    this.removeSpace(mathQuestion);
+    mathQuestion.input = mathQuestion.input.trimStart();
     for (let key in operators) {
       if (new RegExp(`^${key}`).test(mathQuestion.input)) {
         mathQuestion.tokens.push(operators[key]);
@@ -53,9 +53,6 @@ export class WordProblem {
       if (!mathQuestion.input) return mathQuestion.tokens;
       this.getOperator(mathQuestion);
     }
-  }
-  removeSpace(mathQuestion) {
-    mathQuestion.input = mathQuestion.input.trim();
   }
   answer() {
     let tokens = this.tokenize();
