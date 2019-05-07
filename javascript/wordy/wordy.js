@@ -18,7 +18,7 @@ export class WordProblem {
   }
   getNumber(mathQuestion) {
     mathQuestion.input = mathQuestion.input.trimStart();
-    let result = /^-?\d+/.exec(mathQuestion.input);
+    const result = /^-?\d+/.exec(mathQuestion.input);
     if (result === null)
       throw new ArgumentError("Expected a number, but didn't find one");
     mathQuestion.tokens.push(Number(result[0]));
@@ -26,7 +26,7 @@ export class WordProblem {
   }
   getOperator(mathQuestion) {
     mathQuestion.input = mathQuestion.input.trimStart();
-    let result = new RegExp(`^${Object.keys(operators).join("|")}`).exec(
+    const result = new RegExp(`^${Object.keys(operators).join("|")}`).exec(
       mathQuestion.input
     );
     if (result === null)
@@ -52,7 +52,7 @@ export class WordProblem {
       if (!mathQuestion.input) break;
       this.getOperator(mathQuestion);
     }
-    let tokens = mathQuestion.tokens;
+    const tokens = mathQuestion.tokens;
     let answer = tokens[0];
     for (let i = 1; i < tokens.length; i += 2) {
       let operatorFn = tokens[i];
