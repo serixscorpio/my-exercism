@@ -26,14 +26,13 @@ export class WordProblem {
   }
   getOperator(mathQuestion) {
     mathQuestion.input = mathQuestion.input.trimStart();
-    for (let key in operators) {
-      if (new RegExp(`^${key}`).test(mathQuestion.input)) {
-        mathQuestion.tokens.push(operators[key]);
-        mathQuestion.input = mathQuestion.input.replace(key, "");
-        return;
-      }
-    }
-    throw new ArgumentError("Expected an operator, but didn't find one");
+    let result = new RegExp(`^${Object.keys(operators).join("|")}`).exec(
+      mathQuestion.input
+    );
+    if (result === null)
+      throw new ArgumentError("Expected an operator, but didn't find one");
+    mathQuestion.tokens.push(operators[result[0]]);
+    mathQuestion.input = mathQuestion.input.replace(result[0], "");
   }
   /*
    * Turns a string "What is 1 plus 1?" into an array [1, PlusFunction, 1]
