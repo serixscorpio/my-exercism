@@ -38,7 +38,7 @@ export class WordProblem {
   /*
    * Turns a string "What is 1 plus 1?" into an array [1, PlusFunction, 1]
    */
-  tokenize() {
+  answer() {
     if (!this.question.endsWith("?"))
       throw new ArgumentError("The question should end with '?'");
     if (!this.question.startsWith("What is"))
@@ -50,12 +50,10 @@ export class WordProblem {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       this.getNumber(mathQuestion);
-      if (!mathQuestion.input) return mathQuestion.tokens;
+      if (!mathQuestion.input) break;
       this.getOperator(mathQuestion);
     }
-  }
-  answer() {
-    let tokens = this.tokenize();
+    let tokens = mathQuestion.tokens;
     let answer = tokens[0];
     for (let i = 1; i < tokens.length; i += 2) {
       let operatorFn = tokens[i];
