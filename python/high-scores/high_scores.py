@@ -3,11 +3,7 @@ def latest(scores):
 
 
 def personal_best(scores):
-    best_score = scores[0]
-    for score in scores:
-        if score > best_score:
-            best_score = score
-    return best_score
+    return max(scores)
 
 
 def personal_top_three(scores):
