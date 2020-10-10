@@ -33,9 +33,9 @@ def recite(start_verse, end_verse):
 
 
 def recite_verse(zero_based_verse_number):
-    result = [
-        f"On the {nth_days[zero_based_verse_number]} day of Christmas my true love gave to me:"
-    ]
-    for gift in reversed(gifts[: zero_based_verse_number + 1]):
-        result.append(gift)
-    return " ".join(result)
+    return " ".join(
+        [
+            f"On the {nth_days[zero_based_verse_number]} day of Christmas my true love gave to me:"
+        ]
+        + [gift for gift in reversed(gifts[: zero_based_verse_number + 1])]
+    )
