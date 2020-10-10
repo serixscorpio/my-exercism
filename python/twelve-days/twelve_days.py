@@ -37,5 +37,5 @@ def recite_verse(zero_based_verse_number):
         [
             f"On the {nth_days[zero_based_verse_number]} day of Christmas my true love gave to me:"
         ]
-        + [gift for gift in reversed(gifts[: zero_based_verse_number + 1])]
+        + gifts[zero_based_verse_number::-1]
     )
