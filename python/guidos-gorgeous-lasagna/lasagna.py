@@ -1,5 +1,6 @@
-EXPECTED_BAKE_TIME = 40
+"""Lasagna module."""
 
+EXPECTED_BAKE_TIME = 40
 PREPARATION_TIME = 2
 
 
@@ -25,7 +26,6 @@ def preparation_time_in_minutes(number_of_layers: int) -> int:
     return PREPARATION_TIME * number_of_layers
 
 
-# TODO: define the 'elapsed_time_in_minutes()' function
 def elapsed_time_in_minutes(number_of_layers: int, elapsed_bake_time: int) -> int:
     """
     Return elapsed cooking time.
