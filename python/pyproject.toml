@@ -6,11 +6,12 @@ authors = ["Eric Ti Yu Chiang <serixscorpio@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-mypy = "^0.931"
 
 [tool.poetry.dev-dependencies]
-pylint = "^2.12.2"
 black = "^21.12b0"
+ipython = "^8.0.1"
+mypy = "^0.931"
+pylint = "^2.12.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
