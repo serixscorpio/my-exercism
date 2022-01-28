@@ -4,7 +4,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./ghost-gobble-arcade-game",
+    "./meltdown-mitigation",
     "-p",
     "*_test.py"
   ],

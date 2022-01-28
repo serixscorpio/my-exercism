@@ -1,7 +1,12 @@
 """ Meltdown Mitigation exercise """
 
 
-def is_criticality_balanced(temperature, neutrons_emitted):
+from typing import Union
+
+Num = Union[int, float]
+
+
+def is_criticality_balanced(temperature: Num, neutrons_emitted: Num) -> bool:
     """Verify criticality is balanced.
 
     :param temperature: temperature value (integer or float)
@@ -13,11 +18,14 @@ def is_criticality_balanced(temperature, neutrons_emitted):
     - The number of neutrons emitted per second is greater than 500.
     - The product of temperature and neutrons emitted per second is less than 500000.
     """
+    return (
+        temperature < 800
+        and neutrons_emitted > 500
+        and temperature * neutrons_emitted < 500_000
+    )
 
-    pass
 
-
-def reactor_efficiency(voltage, current, theoretical_max_power):
+def reactor_efficiency(voltage: Num, current: Num, theoretical_max_power: Num) -> str:
     """Assess reactor efficiency zone.
 
     :param voltage: voltage value (integer or float)
@@ -36,11 +44,20 @@ def reactor_efficiency(voltage, current, theoretical_max_power):
     (generated power/ theoretical max power)*100
     where generated power = voltage * current
     """
+    generated_power: Num = voltage * current
+    efficiency: Num = (generated_power / theoretical_max_power) * 100
+    if efficiency >= 80:
+        return "green"
+    if efficiency >= 60:
+        return "orange"
+    if efficiency >= 30:
+        return "red"
+    return "black"
 
-    pass
 
-
-def fail_safe(temperature, neutrons_produced_per_second, threshold):
+def fail_safe(
+    temperature: Num, neutrons_produced_per_second: Num, threshold: Num
+) -> str:
     """Assess and return status code for the reactor.
 
     :param temperature: value of the temperature (integer or float)
@@ -52,5 +69,11 @@ def fail_safe(temperature, neutrons_produced_per_second, threshold):
     - `temperature * neutrons per second` +/- 10% of `threshold` == 'NORMAL'
     - `temperature * neutrons per second` is not in the above-stated ranges ==  'DANGER'
     """
-
-    pass
+    percentage_of_threshold: Num = (
+        temperature * neutrons_produced_per_second / threshold
+    )
+    if percentage_of_threshold < 0.9:
+        return "LOW"
+    if percentage_of_threshold <= 1.1:
+        return "NORMAL"
+    return "DANGER"
