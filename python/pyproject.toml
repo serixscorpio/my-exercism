@@ -12,6 +12,7 @@ black = "^21.12b0"
 ipython = "^8.0.1"
 mypy = "^0.931"
 pylint = "^2.12.2"
+pytest = "^6.2.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

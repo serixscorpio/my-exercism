@@ -1,11 +1,14 @@
-def eat_ghost(power_pellet_active, touching_ghost):
+"""Rules from Pac-Man, the classic 1980s-era arcade-game."""
+
+
+def eat_ghost(power_pellet_active: bool, touching_ghost: bool) -> bool:
     """
 
     :param power_pellet_active: bool - does the player have an active power pellet?
     :param touching_ghost:  bool - is the player touching a ghost?
     :return: bool
     """
-    pass
+    return power_pellet_active and touching_ghost
 
 
 def score(touching_power_pellet, touching_dot):
