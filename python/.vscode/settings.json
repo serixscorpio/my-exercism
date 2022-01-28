@@ -4,7 +4,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./black-jack",
+    "./card-games",
     "-p",
     "*_test.py"
   ],
