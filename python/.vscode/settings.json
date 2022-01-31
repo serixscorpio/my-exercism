@@ -4,7 +4,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./little-sisters-essay",
+    "./acronym",
     "-p",
     "*_test.py"
   ],
