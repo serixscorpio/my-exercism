@@ -12,5 +12,10 @@
   "python.testing.unittestEnabled": true,
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.linting.mypyEnabled": true
+  "python.linting.mypyEnabled": true,
+  "python.linting.ignorePatterns": [
+    "**/site-packages/**/*.py",
+    ".vscode/*.py",
+    "**/*_test.py"
+  ]
 }
