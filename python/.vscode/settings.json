@@ -4,7 +4,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./inventory-management",
+    "./cater-waiter",
     "-p",
     "*_test.py"
   ],
