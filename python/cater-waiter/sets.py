@@ -2,6 +2,7 @@
 
 from typing import Union
 from sets_categories_data import (
+    VEGAN, VEGETARIAN, PALEO, KETO, OMNIVORE,
     ALCOHOLS,
     SPECIAL_INGREDIENTS,
 )
