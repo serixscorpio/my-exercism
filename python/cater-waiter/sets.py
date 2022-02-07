@@ -2,7 +2,11 @@
 
 from typing import Union
 from sets_categories_data import (
-    VEGAN, VEGETARIAN, PALEO, KETO, OMNIVORE,
+    VEGAN,
+    VEGETARIAN,
+    PALEO,
+    KETO,
+    OMNIVORE,
     ALCOHOLS,
     SPECIAL_INGREDIENTS,
 )
@@ -49,9 +53,14 @@ def categorize_dish(dish_name: str, dish_ingredients: list[str]) -> str:
     (VEGAN, VEGETARIAN, PALEO, KETO, or OMNIVORE).
     """
     cleaned_ingredients = clean_ingredients(dish_name, dish_ingredients)
-    category_lookup = globals()
-    for category_name in ("VEGAN", "VEGETARIAN", "PALEO", "KETO", "OMNIVORE"):
-        if cleaned_ingredients[1].issubset(category_lookup[category_name]):
+    for category_name, category in {
+        "VEGAN": VEGAN,
+        "VEGETARIAN": VEGETARIAN,
+        "PALEO": PALEO,
+        "KETO": KETO,
+        "OMNIVORE": OMNIVORE,
+    }.items():
+        if cleaned_ingredients[1].issubset(category):
             return f"{dish_name}: {category_name}"
     return ""
 
