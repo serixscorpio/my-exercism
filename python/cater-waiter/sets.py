@@ -1,10 +1,7 @@
+"""cater waiter"""
+
 from typing import Union
 from sets_categories_data import (
-    VEGAN,
-    VEGETARIAN,
-    KETO,
-    PALEO,
-    OMNIVORE,
     ALCOHOLS,
     SPECIAL_INGREDIENTS,
 )
@@ -45,7 +42,8 @@ def categorize_dish(dish_name: str, dish_ingredients: list[str]) -> str:
     :param dish_ingredients: list
     :return: str "dish name: CATEGORY"
 
-    This function should return a string with the `dish name: <CATEGORY>` (which meal category the dish belongs to).
+    This function should return a string with the `dish name: <CATEGORY>` (which meal category the
+    dish belongs to).
     All dishes will "fit" into one of the categories imported from `sets_categories_data.py`
     (VEGAN, VEGETARIAN, PALEO, KETO, or OMNIVORE).
     """
@@ -63,9 +61,10 @@ def tag_special_ingredients(dish: tuple[str, Union[list, set]]) -> tuple[str, se
     :param dish: tuple of (str of dish name, list of dish ingredients)
     :return: tuple of (str of dish name, set of dish special ingredients)
 
-    Return the dish name followed by the `set` of ingredients that require a special note on the dish description.
-    For the purposes of this exercise, all allergens or special ingredients that need to be tracked are in the
-    SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
+    Return the dish name followed by the `set` of ingredients that require a special note on the
+    dish description.
+    For the purposes of this exercise, all allergens or special ingredients that need to be tracked
+    are in the SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
     """
 
     return dish[0], SPECIAL_INGREDIENTS & set(dish[1])
@@ -85,7 +84,7 @@ def compile_ingredients(dishes: list[set]) -> set:
     return master_ingredients
 
 
-def separate_appetizers(dishes, appetizers):
+def separate_appetizers(dishes: list[str], appetizers: list[str]) -> list[str]:
     """
 
     :param dishes: list of dish names
@@ -95,14 +94,19 @@ def separate_appetizers(dishes, appetizers):
     The function should return the list of dish names with appetizer names removed.
     Either list could contain duplicates and may require de-duping.
     """
+    appetizers_set = set(appetizers)
 
-    pass
+    def is_not_appetizer(dish: str) -> bool:
+        return dish not in appetizers_set
+
+    return [dish for dish in set(dishes) if is_not_appetizer(dish)]
 
 
-def singleton_ingredients(dishes, intersection):
+def singleton_ingredients(dishes: list[set], intersection: set) -> set:
     """
 
-    :param intersection: constant - one of (VEGAN_INTERSECTION,VEGETARIAN_INTERSECTION,PALEO_INTERSECTION,
+    :param intersection: constant - one of (VEGAN_INTERSECTION,VEGETARIAN_INTERSECTION,
+                                            PALEO_INTERSECTION,
                                             KETO_INTERSECTION,OMNIVORE_INTERSECTION)
     :param dishes:  list of ingredient sets
     :return: set of singleton ingredients
@@ -111,5 +115,4 @@ def singleton_ingredients(dishes, intersection):
     Each `<CATEGORY>_INTERSECTION` is an `intersection` of all dishes in the category.
     The function should return a `set` of ingredients that only appear in a single dish.
     """
-
-    pass
+    return compile_ingredients(dishes) - intersection
