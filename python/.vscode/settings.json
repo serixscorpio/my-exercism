@@ -4,7 +4,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./scrabble-score",
+    "./ellens-alien-game",
     "-p",
     "*_test.py"
   ],
