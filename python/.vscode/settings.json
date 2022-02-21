@@ -4,7 +4,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./ellens-alien-game",
+    "./kindergarten-garden",
     "-p",
     "*_test.py"
   ],
