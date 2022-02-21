@@ -17,7 +17,6 @@ class Alien:
 
     def collision_detection(self, other_object):
         """collision detection method yet to be implemented"""
-        pass
 
     def hit(self):
         """decrement the health of alien by 1"""
