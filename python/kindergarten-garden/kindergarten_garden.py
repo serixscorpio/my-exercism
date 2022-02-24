@@ -38,7 +38,7 @@ class Garden:
         diagram: str,
         students: Sequence = DEFAULT_STUDENTS,
     ):
-        self.diagram_row_1, self.diagram_row_2 = diagram.split("\n")
+        self.rows = diagram.split("\n")
         self.students = sorted(students)
 
     def plants(self, student_name: str) -> list[str]:
@@ -46,11 +46,7 @@ class Garden:
 
         offset = self.students.index(student_name) * 2
         return [
-            PLANTS[key]
-            for key in (
-                self.diagram_row_1[offset],
-                self.diagram_row_1[offset + 1],
-                self.diagram_row_2[offset],
-                self.diagram_row_2[offset + 1],
-            )
+            PLANTS[plant_character]
+            for row in self.rows
+            for plant_character in row[offset : offset + 2]
         ]
