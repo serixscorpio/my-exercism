@@ -10,6 +10,21 @@ PLANTS = {
     "V": "Violets",
 }
 
+DEFAULT_STUDENTS = (
+    "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Eve",
+    "Fred",
+    "Ginny",
+    "Harriet",
+    "Ileana",
+    "Joseph",
+    "Kincaid",
+    "Larry",
+)
+
 
 class Garden:
     """Garden class
@@ -21,20 +36,7 @@ class Garden:
     def __init__(
         self,
         diagram: str,
-        students: Sequence = (
-            "Alice",
-            "Bob",
-            "Charlie",
-            "David",
-            "Eve",
-            "Fred",
-            "Ginny",
-            "Harriet",
-            "Ileana",
-            "Joseph",
-            "Kincaid",
-            "Larry",
-        ),
+        students: Sequence = DEFAULT_STUDENTS,
     ):
         self.diagram_row_1, self.diagram_row_2 = diagram.split("\n")
         self.students = sorted(students)
