@@ -10,21 +10,22 @@ class Luhn:
 
     def valid(self) -> bool:
         """check if card num is valid using luhn algorithm"""
-        if re.match(r"[^0-9 ]", self.card_num):
-            # non-digit or non-space found
+        card_num_no_space = re.sub(r" ", "", self.card_num)
+        if re.search(r"\D", card_num_no_space):
+            # non-digit found
             return False
-        if len(self.card_num) <= 1:
+        if len(card_num_no_space) <= 1:
             return False
         total = 0
-        for index, char in enumerate(reversed(re.sub(r"\D", "", self.card_num))):
+        for index, char in enumerate(reversed(card_num_no_space)):
             digit = int(char)
             if index % 2 == 0:
                 total += digit
             else:
                 subtotal = digit * 2
-                total += subtotal
                 if subtotal > 9:
-                    total -= 9
+                    subtotal -= 9
+                total += subtotal
         if total % 10 == 0:
             return True
         return False
