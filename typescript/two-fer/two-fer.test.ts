@@ -8,11 +8,11 @@ describe('TwoFer', () => {
 
   it('a name given', () => {
     const expected = 'One for Alice, one for me.'
-    expect(twoFer({ name: 'Alice' })).toEqual(expected)
+    expect(twoFer('Alice')).toEqual(expected)
   })
 
   xit('another name given', () => {
     const expected = 'One for Bob, one for me.'
-    expect(twoFer({ name: 'Bob' })).toEqual(expected)
+    expect(twoFer('Bob')).toEqual(expected)
   })
 })
