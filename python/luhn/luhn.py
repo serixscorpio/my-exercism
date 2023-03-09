@@ -4,7 +4,7 @@ from functools import cache
 
 
 class Luhn:
-    """An implementation of luhn algorithm"""
+    """An implementation of the luhn algorithm."""
 
     def __init__(self, card_num: str):
         self.card_num = card_num
