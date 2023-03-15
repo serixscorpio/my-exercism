@@ -63,7 +63,6 @@ class BankAccountTest(unittest.TestCase):
         self.assertEqual(type(err.exception), ValueError)
         self.assertEqual(err.exception.args[0], "account not open")
 
-
     def test_withdraw_from_closed_account(self):
         account = BankAccount()
         account.open()
@@ -155,5 +154,6 @@ class BankAccountTest(unittest.TestCase):
         for thread in threads:
             thread.join()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

@@ -1,4 +1,5 @@
 """Bank Account"""
+import time
 
 
 class BankAccount:
@@ -27,9 +28,12 @@ class BankAccount:
             raise ValueError("account not open")
         if amount <= 0:
             raise ValueError("amount must be greater than 0")
-        self.balance += amount
+        local_balance = self.balance
+        local_balance += amount
+        time.sleep(0.001)
+        self.balance = local_balance
 
-    def withdraw(self, amount):
+    def withdraw(self, amount: int):
         """Withdraw amount from account."""
         if not self.opened:
             raise ValueError("account not open")
@@ -37,8 +41,10 @@ class BankAccount:
             raise ValueError("amount must be greater than 0")
         if self.balance < amount:
             raise ValueError("amount must be less than balance")
-
-        self.balance -= amount
+        local_balance = self.balance
+        local_balance -= amount
+        time.sleep(0.001)
+        self.balance = local_balance
 
     def close(self):
         """Close account."""
