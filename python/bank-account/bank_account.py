@@ -1,5 +1,6 @@
 """Bank Account"""
 import time
+from threading import Lock
 
 
 class BankAccount:
@@ -8,6 +9,7 @@ class BankAccount:
     def __init__(self):
         self.opened = None
         self.balance = 0
+        self.lock = Lock()
 
     def get_balance(self) -> int:
         """Get account balance in minor currency."""
@@ -28,10 +30,11 @@ class BankAccount:
             raise ValueError("account not open")
         if amount <= 0:
             raise ValueError("amount must be greater than 0")
-        local_balance = self.balance
-        local_balance += amount
-        time.sleep(0.001)
-        self.balance = local_balance
+        with self.lock:
+            local_balance = self.balance
+            local_balance += amount
+            time.sleep(0.001)
+            self.balance = local_balance
 
     def withdraw(self, amount: int):
         """Withdraw amount from account."""
@@ -41,10 +44,11 @@ class BankAccount:
             raise ValueError("amount must be greater than 0")
         if self.balance < amount:
             raise ValueError("amount must be less than balance")
-        local_balance = self.balance
-        local_balance -= amount
-        time.sleep(0.001)
-        self.balance = local_balance
+        with self.lock:
+            local_balance = self.balance
+            local_balance -= amount
+            time.sleep(0.001)
+            self.balance = local_balance
 
     def close(self):
         """Close account."""
