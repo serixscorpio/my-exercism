@@ -7,7 +7,7 @@ class BankAccount:
     """Bank Account."""
 
     def __init__(self):
-        self.opened = None
+        self.opened = False
         self.balance = 0
         self.lock = Lock()
 
@@ -17,14 +17,14 @@ class BankAccount:
             raise ValueError("account not open")
         return self.balance
 
-    def open(self):
+    def open(self) -> None:
         """Open account."""
         if self.opened:
             raise ValueError("account already open")
         self.balance = 0
         self.opened = True
 
-    def deposit(self, amount: int):
+    def deposit(self, amount: int) -> None:
         """Deposit amount into account."""
         if not self.opened:
             raise ValueError("account not open")
@@ -36,7 +36,7 @@ class BankAccount:
             time.sleep(0.001)
             self.balance = local_balance
 
-    def withdraw(self, amount: int):
+    def withdraw(self, amount: int) -> None:
         """Withdraw amount from account."""
         if not self.opened:
             raise ValueError("account not open")
@@ -50,7 +50,7 @@ class BankAccount:
             time.sleep(0.001)
             self.balance = local_balance
 
-    def close(self):
+    def close(self) -> None:
         """Close account."""
         if not self.opened:
             raise ValueError("account not open")
