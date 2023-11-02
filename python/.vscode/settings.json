@@ -1,6 +1,4 @@
 {
-  "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": false,
   "python.testing.unittestArgs": [
     "-v",
     "-s",
@@ -10,15 +8,7 @@
   ],
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": false,
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.mypyEnabled": true,
-  "python.linting.ignorePatterns": [
-    "**/site-packages/**/*.py",
-    ".vscode/*.py",
-    "**/*_test.py"
-  ],
   "python.testing.pytestArgs": [
-    "locomotive-engineer"
+    "plane-tickets"
   ]
 }
