@@ -1,8 +1,8 @@
-def begins_with_vowel_sound(word: str):
+def begins_with_vowel_sound(word: str) -> bool:
     return word[0] in "aeiou" or word[:2] in ["xr", "yt"]
 
 
-def vowel_sound_starts_at(word: str):
+def vowel_sound_starts_at(word: str) -> int:
     if begins_with_vowel_sound(word):
         return 0
     for i in range(1, len(word)):
@@ -13,10 +13,10 @@ def vowel_sound_starts_at(word: str):
             return i
 
 
-def translate_word(word: str):
+def translate_word(word: str) -> str:
     boundary = vowel_sound_starts_at(word)
     return word[boundary:] + word[:boundary] + "ay"
 
 
-def translate(text: str):
+def translate(text: str) -> str:
     return " ".join(map(translate_word, text.split()))
