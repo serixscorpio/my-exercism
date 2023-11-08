@@ -2,7 +2,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./poker",
+    "./pig-latin",
     "-p",
     "*_test.py"
   ],
