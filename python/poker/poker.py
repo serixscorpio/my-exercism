@@ -41,9 +41,9 @@ def four_of_a_kind_ranks() -> list[str]:
     [AAAAK, AAAAQ, ..., 22224, 22223]
     """
     return [
-        quad_card_rank * 4 + kicker_card_rank
-        for quad_card_rank in CARD_RANKS
-        for kicker_card_rank in [i for i in CARD_RANKS if i != quad_card_rank]
+        quad_rank * 4 + kicker_rank
+        for quad_rank in CARD_RANKS
+        for kicker_rank in [i for i in CARD_RANKS if i != quad_rank]
     ]
 
 
@@ -52,9 +52,9 @@ def full_house_ranks() -> list[str]:
     [AAAKK, AAAQQ, ..., 22244, 22233]
     """
     return [
-        triple_card_rank * 3 + pair_card_rank * 2
-        for triple_card_rank in CARD_RANKS
-        for pair_card_rank in [i for i in CARD_RANKS if i != triple_card_rank]
+        triple_rank * 3 + pair_rank * 2
+        for triple_rank in CARD_RANKS
+        for pair_rank in [i for i in CARD_RANKS if i != triple_rank]
     ]
 
 
@@ -80,9 +80,9 @@ def three_of_a_kind_ranks() -> list[str]:
     [AAAKQ, AAAKJ, ..., 22253, 22243]
     """
     return [
-        card_rank * 3 + "".join(kickers_rank)
-        for card_rank in CARD_RANKS
-        for kickers_rank in combinations([i for i in CARD_RANKS if i != card_rank], 2)
+        triple_rank * 3 + "".join(kicker_ranks)
+        for triple_rank in CARD_RANKS
+        for kicker_ranks in combinations([i for i in CARD_RANKS if i != triple_rank], 2)
     ]
 
 
@@ -102,9 +102,9 @@ def one_pair_ranks() -> list[str]:
     [AAKQJ, AAKQ10, ..., 22643, 22543]
     """
     return [
-        card_rank * 2 + "".join(kickers_rank)
-        for card_rank in CARD_RANKS
-        for kickers_rank in combinations([i for i in CARD_RANKS if i != card_rank], 3)
+        pair_rank * 2 + "".join(kicker_ranks)
+        for pair_rank in CARD_RANKS
+        for kicker_ranks in combinations([i for i in CARD_RANKS if i != pair_rank], 3)
     ]
 
 
@@ -118,18 +118,16 @@ def high_card_ranks() -> list[str]:
     return result
 
 
-HAND_RANKS = list(
-    reversed(
-        straight_flush_ranks()
-        + four_of_a_kind_ranks()
-        + full_house_ranks()
-        + flush_ranks()
-        + straight_ranks()
-        + three_of_a_kind_ranks()
-        + two_pairs_ranks()
-        + one_pair_ranks()
-        + high_card_ranks()
-    )
+HAND_RANKS = (
+    straight_flush_ranks()
+    + four_of_a_kind_ranks()
+    + full_house_ranks()
+    + flush_ranks()
+    + straight_ranks()
+    + three_of_a_kind_ranks()
+    + two_pairs_ranks()
+    + one_pair_ranks()
+    + high_card_ranks()
 )
 
 
@@ -145,11 +143,5 @@ def card_rank_key(card: Card) -> int:
 
 
 def best_hands(hands: list[str]):
-    result = []
-    for hand in sorted(map(Hand, hands), key=hand_rank_key, reverse=True):
-        if not result:
-            result.append(str(hand))
-            best_hand = hand
-        elif hand.rank() == best_hand.rank():
-            result.append(str(hand))
-    return result
+    sorted_hands = sorted(map(Hand, hands), key=hand_rank_key)
+    return [str(hand) for hand in sorted_hands if hand.rank() == sorted_hands[0].rank()]
