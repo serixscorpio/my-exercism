@@ -2,7 +2,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./collatz-conjecture",
+    "./poker",
     "-p",
     "*_test.py"
   ],
