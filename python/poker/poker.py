@@ -6,6 +6,17 @@ CARD_RANKS = list("AKQJ") + [str(n) for n in reversed(range(2, 11))]
 
 
 class Hand:
+    """A poker hand.
+    A hand can be initialized from string. For example: "4S JS 7H 8D 5C".
+    A hand has a list of cards.  Each card has a rank and a suit.
+    >>> hand = Hand("4S JS 7H 8D 5C")
+    >>> hand._cards
+    [Card(rank='4', suit='S'), Card(rank='J', suit='S'), Card(rank='7', suit='H'),
+     Card(rank='8', suit='D'), Card(rank='5', suit='C')]
+    >>> hand.rank()
+    'J8745'
+    """
+
     def __init__(self, hand_str: str):
         self._hand_str = hand_str
         self._cards = [Card(card_str[:-1], card_str[-1]) for card_str in hand_str.split()]
@@ -20,7 +31,14 @@ class Hand:
         return self._hand_str
 
     def rank(self) -> str:
-        """return rank of a hand"""
+        """return rank of a hand,
+        The rank representation is generally from highest ranking parts to lowest ranking parts.
+        Ex. "J8745" for "4S JS 7H 8D 5C" (a high card)
+            "F109876" for "9S 8S 7S 6S 10S" (a straight flush)
+            "FK10532" for "5H KH 2H 10H 3H" (a flush)
+            "A5432" for "4S 3H 2S AD 5C" (a straight, "A" precedes "5" because it ranks higher as an individual card)
+            "44488" for "4S 8H 4D 4H 8D" (a full house)
+        """
         counter = Counter(card.rank for card in sorted(self._cards, key=card_rank_key, reverse=True))
         result = "".join(card_rank * count for card_rank, count in counter.most_common())
         if len({card.suit for card in self._cards}) == 1:
@@ -143,5 +161,8 @@ def card_rank_key(card: Card) -> int:
 
 
 def best_hands(hands: list[str]):
+    """return the best hand(s) from a list of hands
+    There can be multiple best hands if the hands' ranks are tied.
+    """
     sorted_hands = sorted(map(Hand, hands), key=hand_rank_key)
     return [str(hand) for hand in sorted_hands if hand.rank() == sorted_hands[0].rank()]
