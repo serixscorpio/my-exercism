@@ -1,6 +1,10 @@
+VOWELS = "aeiou"
+VOWELISH_SEQUENCE = ["xr", "yt"]
+
+
 def begins_with_vowel_sound(word: str) -> bool:
     """Decide if a word starts with a vowel sound."""
-    return word[0] in "aeiou" or word[:2] in ["xr", "yt"]
+    return word[0] in VOWELS or word[:2] in VOWELISH_SEQUENCE
 
 
 def vowel_sound_starts_at(word: str) -> int:
@@ -8,7 +12,7 @@ def vowel_sound_starts_at(word: str) -> int:
     if begins_with_vowel_sound(word):
         return 0
     for i in range(1, len(word)):
-        if word[i] in "aeiouy":
+        if word[i] in (VOWELS + "y"):
             # account for word starts with a consonant sound followed by "qu"
             if word[i - 1] == "q" and word[i] == "u":
                 return i + 1
