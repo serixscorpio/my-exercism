@@ -14,7 +14,7 @@ def vowel_sound_starts_at(word: str) -> int:
     for i in range(1, len(word)):
         if word[i] in (VOWELS + "y"):
             # account for word starts with a consonant sound followed by "qu"
-            if word[i - 1] == "q" and word[i] == "u":
+            if word[i - 1 : i + 1] == "qu":
                 return i + 1
             return i
 
