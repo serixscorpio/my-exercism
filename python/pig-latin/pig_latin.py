@@ -17,6 +17,7 @@ def vowel_sound_starts_at(word: str) -> int:
             if word[i - 1 : i + 1] == "qu":
                 return i + 1
             return i
+    return len(word)
 
 
 def translate_word(word: str) -> str:
