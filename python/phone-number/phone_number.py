@@ -16,7 +16,7 @@ class PhoneNumber:
         )  # Remove all formatting characters
         if re.search(r"[A-Za-z]", number_str):
             raise ValueError("letters not permitted")
-        if re.search(r"\D", number_str):
+        if not number_str.isdigit():
             raise ValueError("punctuations not permitted")
         if len(number_str) < 10:
             raise ValueError("must not be fewer than 10 digits")
