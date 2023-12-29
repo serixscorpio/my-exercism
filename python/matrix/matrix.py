@@ -1,6 +1,3 @@
-from more_itertools import nth
-
-
 class Matrix:
     def __init__(self, matrix_string):
         self.rows = []
