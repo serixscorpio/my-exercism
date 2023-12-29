@@ -1,5 +1,7 @@
 # pylint: disable-all
 # flake8: noqa,
+from typing import Iterable
+
 from sets_categories_data import (
     KETO_INTERSECTIONS,
     OMNIVORE_INTERSECTIONS,
@@ -3321,8 +3323,10 @@ nondupes = [
     "Shrimp, Bacon and Crispy Chickpea Tacos with Salsa de Guacamole",
 ]
 
-group_1 = [item for item in recipes_with_duplicates if item[0] in dupes]
-group_2 = [
+group_1: list[tuple[str, Iterable[str]]] = [
+    item for item in recipes_with_duplicates if item[0] in dupes
+]
+group_2: list[tuple[str, Iterable[str]]] = [
     (item[1], item[2]) for item in recipes_without_duplicates if item[1] in nondupes
 ]
 

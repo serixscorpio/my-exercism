@@ -1,14 +1,15 @@
 """cater waiter"""
 
 from typing import Union
+
 from sets_categories_data import (
-    VEGAN,
-    VEGETARIAN,
-    PALEO,
+    ALCOHOLS,
     KETO,
     OMNIVORE,
-    ALCOHOLS,
+    PALEO,
     SPECIAL_INGREDIENTS,
+    VEGAN,
+    VEGETARIAN,
 )
 
 
