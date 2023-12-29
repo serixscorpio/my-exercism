@@ -1,7 +1,7 @@
 """Garden implementation"""
 
 
-from typing import Sequence
+from typing import Iterable
 
 PLANTS = {
     "C": "Clover",
@@ -36,7 +36,7 @@ class Garden:
     def __init__(
         self,
         diagram: str,
-        students: Sequence = DEFAULT_STUDENTS,
+        students: Iterable[str] = DEFAULT_STUDENTS,
     ):
         self.rows = diagram.split("\n")
         self.students = sorted(students)
