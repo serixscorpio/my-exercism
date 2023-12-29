@@ -10,7 +10,7 @@ class PhoneNumber:
         """return phone number in the format (XXX)-XXX-XXXX"""
         return f"({self.area_code})-{self.number[3:6]}-{self.number[6:]}"
 
-    def _clean_nanp(self, number_str: str) -> int:
+    def _clean_nanp(self, number_str: str) -> str:
         number_str = re.sub(
             r"[\s.()+-]", "", number_str
         )  # Remove all formatting characters
