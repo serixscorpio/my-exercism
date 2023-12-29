@@ -2,7 +2,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./collatz-conjecture",
+    "./phone-number",
     "-p",
     "*_test.py"
   ],
